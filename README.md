@@ -12,4 +12,3 @@
 - Dit maakt het moeilijk om het printbaar te maken
 - Kan zijn dat er meerdere kaarten bij 1 hit zitten, dit wel zeggen dat het een setje is
 - Soms zijn het geen briefkaarten maar zie je briefkaarten op een foto (bijvoorbeeld de productie er van)
--
