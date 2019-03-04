@@ -1,9 +1,15 @@
-# Project 1 @cmda-minor-web · 2018-2019
+# Maak je briefkaart van vroeger
 
-## Zoek in de de collectie van de OBA
+## Concept
 
-Het project vindt plaats bij de Centrale OBA. Maandagochtend is om 10.00 uur de kickoff, vrijdag zijn de presentaties van de resultaten. In een week bouwt iedere student een eigen prototype dat bezoekers kan helpen om items uit de OBA collectie te vinden. Technieken geleerd bij [CSS to the Rescue](https://github.com/cmda-minor-web/css-to-the-rescue-1819) en [Web App from Scratch](https://github.com/cmda-minor-web/web-app-from-scratch-1819) worden toegepast bij het bouwen van de de prototypes.
+- Vind een briefkaart wat gedigitaliseerd is van vroeger
+- Voeg de gegevens toe, bijvoorbeeld naar wie het opgestuurd moet worden, een extra bericht, etc.
+- Print het uit (via de OBA?)
 
-We verzamelen maandagochtend om 09.45 op de 1e verdieping van de Centrale OBA, [Oosterdokskade 143](https://www.google.com/maps/place/OBA+library+of+Amsterdam/@52.3756983,4.9082087,15z/data=!4m2!3m1!1s0x0:0x6b97f693e6ecb494?ved=2ahUKEwioo6OrzubgAhWLNOwKHR6KDQgQ_BIwCnoECAYQCA).
+## Valkuilen
 
-
+- Veel data komt van externe bronnen
+- Dit maakt het moeilijk om het printbaar te maken
+- Kan zijn dat er meerdere kaarten bij 1 hit zitten, dit wel zeggen dat het een setje is
+- Soms zijn het geen briefkaarten maar zie je briefkaarten op een foto (bijvoorbeeld de productie er van)
+-
