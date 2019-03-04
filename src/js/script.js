@@ -8,27 +8,30 @@ import { API } from "/node_modules/oba-wrapper/js/index.js";
   });
 
   const request = await api.createIterator(
-    "search/briefkaart&facet=type(postcard)"
+    "search/gracht&facet=type(postcard)"
   );
   for await (const response of request) {
-    const results = response.map(result => object(result));
+    const results = response.map(result => createObject(result));
     console.log(results);
     renderData(results);
   }
 })();
 
-const object = data => {
-  const createObject = {
+const createObject = data => {
+  const object = {
     title: data.title.full,
     publication: data.publication.year,
     image: data.images[0]
   };
-  return createObject;
+  return object;
 };
 
 const renderData = data => {
-  const main = document.querySelector("main");
-  const postcard = document.createElement("div");
-  postcard.innerHTML = `${data[0].title}`;
-  main.appendChild(postcard);
+  data.map(element => {
+    const main = document.querySelector("main");
+    const postcard = document.createElement("img");
+    postcard.src = `${element.image}`;
+    postcard.setAttribute("class", "postcard-image");
+    main.appendChild(postcard);
+  });
 };
