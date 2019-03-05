@@ -13,7 +13,6 @@ import { API } from "/node_modules/oba-wrapper/js/index.js";
   for await (const response of request) {
     // console.log(response);
     const results = response.map(result => createObject(result));
-    console.log(results);
     renderData(results);
   }
 })();
@@ -32,11 +31,21 @@ const createObject = data => {
 
 const renderData = data => {
   console.log(data);
-  data.map(element => {
-    const main = document.querySelector(".container");
-    const postcard = document.createElement("img");
-    postcard.src = `${element.image}`;
-    postcard.setAttribute("class", "postcard");
-    main.appendChild(postcard);
+  const main = document.querySelector(".container");
+  data.map(postcard => {
+    console.log(postcard.title);
+    // console.table(data);
+    const postcardContainer = document.createElement("div");
+    postcardContainer.setAttribute("class", "postcard-item");
+
+    const postcardTemplate = `
+		<h1 class="postcard-title">${postcard.title}</h1>
+		<span class="postcard-publication">${postcard.publication}</span>
+		<h3 class="postcard-subject">${postcard.subject}</h3>
+		`;
+    postcardContainer.style.backgroundImage = `url(${postcard.image})`;
+    console.log(postcard.image);
+    postcardContainer.innerHTML = postcardTemplate;
+    main.appendChild(postcardContainer);
   });
 };

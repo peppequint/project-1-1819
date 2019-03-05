@@ -11,17 +11,11 @@ body {
   display: grid;
   grid-template-areas:
     "header header header header"
-    "header header header header"
-    "container container container container"
-    "container container container container"
-    "container container container container"
-    "container container container container"
     "container container container container"
     "footer footer footer footer";
   grid-template-columns: repeat(4, 25%);
-  grid-template-rows: repeat(8, 12.5%);
+  grid-template-rows: 250px 1fr 125px;
   font-family: "Avenir", sans-serif;
-  height: 100vh;
   margin: 0;
   width: 100%;
 }
@@ -85,7 +79,19 @@ body {
 
 /* main */
 .container {
+  display: flex;
+  flex-flow: row wrap;
   grid-area: container;
+}
+
+.postcard-item {
+  background-size: cover;
+  height: 400px;
+  width: 31.11%;
+}
+
+.postcard-item:nth-child(3n + 2) {
+  margin: 0 3.33%;
 }
 
 /* footer */
