@@ -11,6 +11,7 @@ import { API } from "/node_modules/oba-wrapper/js/index.js";
     "search/gracht&facet=type(postcard)"
   );
   for await (const response of request) {
+    // console.log(response);
     const results = response.map(result => createObject(result));
     console.log(results);
     renderData(results);
@@ -19,19 +20,23 @@ import { API } from "/node_modules/oba-wrapper/js/index.js";
 
 const createObject = data => {
   const object = {
-    title: data.title.full,
-    publication: data.publication.year,
-    image: data.images[0]
+    title: data.titles.title._text,
+    subject: data.subjects.subject._text,
+    publication: data.publication
+      ? data.publication.year._text
+      : "Jaar niet bekend",
+    image: data.coverimages.coverimage._text
   };
   return object;
 };
 
 const renderData = data => {
+  console.log(data);
   data.map(element => {
-    const main = document.querySelector("main");
+    const main = document.querySelector(".container");
     const postcard = document.createElement("img");
     postcard.src = `${element.image}`;
-    postcard.setAttribute("class", "postcard-image");
+    postcard.setAttribute("class", "postcard");
     main.appendChild(postcard);
   });
 };
