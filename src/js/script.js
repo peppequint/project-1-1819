@@ -11,7 +11,7 @@ const app = {
     );
     for await (const response of request) {
       const results = response.map(result => createObject(result));
-      console.table(results);
+      localStorage.setItem("results", JSON.stringify(results));
       render.overview(results);
     }
   })()
@@ -45,21 +45,23 @@ const render = {
 
       const postcardTemplate = `
 				<span class="postcard-publication">${postcard.publication}</span>
+				<p class="postcard-title">${postcard.title}</p>
 				<h3 class="postcard-subject">${postcard.subject}</h3>
-				<a class="postcard-link" href="#${index}">Test</a>
+				<a class="postcard-link" href="#${index}">Maak je briefkaart</a>
 				`;
       postcardContainer.style.background = `
 				linear-gradient(
-		      rgba(0, 0, 0, .25),
-		      rgba(0, 0, 0, .25)
-		    ), url(${postcard.image})
+		      rgba(0, 0, 0, .5),
+		      rgba(0, 0, 0, .5)
+		    ), url(${postcard.image}) center
 				`;
       postcardContainer.innerHTML = postcardTemplate;
       main.appendChild(postcardContainer);
     });
   },
-  detail: data => {
-    console.log(data);
+  detail: number => {
+    const postcardDetail = JSON.parse(localStorage.getItem("results"));
+    console.log(postcardDetail[number]);
   }
 };
 
@@ -68,10 +70,10 @@ const router = {
     routie({
       home: () => {
         app.call();
-      },
-      detail: detail => {
-        console.log(detail);
       }
+    });
+    routie(":number", number => {
+      render.detail(number);
     });
   }
 };
