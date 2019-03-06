@@ -82,18 +82,28 @@ body {
   display: flex;
   flex-flow: row wrap;
   grid-area: container;
+  justify-content: space-between;
 }
 
 .postcard-item {
+  align-items: flex-end;
   background-size: cover;
-  height: 400px;
-  width: 31.11%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 275px;
+  justify-content: flex-end;
+  padding: 0rem 2rem;
+  width: 48%;
 }
 
-.postcard-item:nth-child(3n + 2) {
-  margin: 0 3.33%;
+.postcard-item:nth-child(n + 3) {
+  margin-top: 4%;
 }
 
+.postcard-item:hover {
+  cursor: pointer;
+}
 /* footer */
 .footer {
   grid-area: footer;
