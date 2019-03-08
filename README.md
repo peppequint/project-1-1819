@@ -41,9 +41,10 @@ npm install
 - [ ] Aantrekkelijk maken van de applicatie
 - [ ] Betere loader om duidelijk te maken dat de data wordt opgehaald
 - [ ] Meer interactie op de overzichtspagina met de briefkaarten
-- [ ] Meer interactie met de briefkaart in plaats van het invullen van een formulier
+- [ ] Meer interactie met de briefkaart in plaats van het invullen van een formulier (flippen van de kaart bijv.)
 - [ ] Het gebruik van CSS Print onderzoeken en gebruiken
 - [ ] 'Terug-knop' naar de overzichtspagina i.c.m. localStorage
+- [ ] Meer interactie met 'search bar'
 
 ## Sources
 
