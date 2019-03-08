@@ -1,20 +1,25 @@
 import { API } from "/node_modules/oba-wrapper/js/index.js";
 
 const app = {
-  call: (async () => {
+  call: async query => {
+    handle.load();
     const api = new API({
       key: "1e19898c87464e239192c8bfe422f280"
     });
 
     const request = await api.createIterator(
-      "search/water&facet=type(postcard)"
+      "search/" + query + "&facet=type(postcard)"
     );
     for await (const response of request) {
+      console.table(response);
       const results = response.map(result => createObject(result));
       localStorage.setItem("results", JSON.stringify(results));
+      console.table(results);
       render.overview(results);
+      handle.search();
+      document.querySelector("#A").classList.remove("animate");
     }
-  })()
+  }
 };
 
 const createObject = data => {
@@ -30,7 +35,8 @@ const createObject = data => {
     publication: data.publication
       ? data.publication.year._text
       : "Jaar onbekend",
-    image: data.coverimages.coverimage._text
+    image: data.coverimages.coverimage._text,
+    url: data.eresources.eresource._attributes.url
   };
 
   return object;
@@ -39,15 +45,16 @@ const createObject = data => {
 const render = {
   overview: data => {
     const main = document.querySelector(".container");
+    main.innerHTML = "";
     data.map((postcard, index) => {
       const postcardContainer = document.createElement("div");
       postcardContainer.setAttribute("class", "postcard-item");
 
       const postcardTemplate = `
-				<span class="postcard-publication">${postcard.publication}</span>
-				<p class="postcard-title">${postcard.title}</p>
-				<h3 class="postcard-subject">${postcard.subject}</h3>
-				<a class="postcard-link" href="#${index}">Maak je briefkaart</a>
+				<span class="postcard-item--publication">${postcard.publication}</span>
+				<p class="postcard-item--title">${postcard.title}</p>
+				<h3 class="postcard-item--subject">${postcard.subject}</h3>
+				<a class="postcard-item--link" href="#${index}">Maak je briefkaart</a>
 				`;
       postcardContainer.style.background = `
 				linear-gradient(
@@ -60,20 +67,52 @@ const render = {
     });
   },
   detail: number => {
-    const postcardDetail = JSON.parse(localStorage.getItem("results"));
-    console.log(postcardDetail[number]);
+    const data = JSON.parse(localStorage.getItem("results"));
+    console.log(data[number]);
+    // document.querySelector(".container").innerHTML = "";
+    const container = document.querySelector(".container");
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+    const postcardDetail = document.createElement("div");
+    postcardDetail.setAttribute("class", "postcard-detail");
+
+    const postcardTemplateDetail = `
+			<img class='postcard-detail--image' src='${data[number].image}'/>
+			<h1 class='postcard-detail--title'>${data[number].title}</h1>
+			<h3 class='postcard-detail--subject'>${data[number].subject}</h3>
+			<span class='postcard-detail--year'>${data[number].publication}</span>
+		`;
+    postcardDetail.innerHTML = postcardTemplateDetail;
+    container.appendChild(postcardDetail);
+  }
+};
+
+const handle = {
+  search: () => {
+    const searchButton = document.querySelector(".search-button");
+    const searchLabel = document.querySelector(".search-label");
+    const searchValue = document.querySelector(".search-bar");
+
+    searchButton.addEventListener("click", query => {
+      app.call(searchValue.value);
+    });
+  },
+  load: () => {
+    document.querySelector("#A").classList.add("animate");
+    console.log("Loading results");
   }
 };
 
 const router = {
   init: () => {
     routie({
-      home: () => {
-        app.call();
+      "": () => {
+        app.call("gracht");
+      },
+      ":number": number => {
+        render.detail(number);
       }
-    });
-    routie(":number", number => {
-      render.detail(number);
     });
   }
 };
