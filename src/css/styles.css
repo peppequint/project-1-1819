@@ -4,6 +4,7 @@
 }
 * {
   box-sizing: border-box;
+  font-family: "Avenir", sans-serif;
 }
 
 body {
@@ -14,7 +15,7 @@ body {
     "footer footer footer footer";
   grid-template-columns: repeat(4, 25%);
   grid-template-rows: 250px 1fr 125px;
-  font-family: "Avenir", sans-serif;
+
   margin: 0;
   width: 100%;
 }
@@ -29,7 +30,9 @@ button {
   padding: 0;
 }
 
-button:focus {
+button:focus,
+input:focus,
+textarea:focus {
   outline: none;
 }
 
@@ -168,12 +171,88 @@ button:hover {
   cursor: pointer;
 }
 
-.postcard-detail--image {
-  max-width: 600px;
+.postcard-detail {
+  display: grid;
+  grid-template-columns: repeat(8, 12.5%);
+  grid-template-rows: repeat(8, 12.5%);
+  height: 70vh;
   width: 100%;
 }
 
-/* footer */
+.postcard-detail--image {
+  grid-column: 1 / 5;
+  grid-row: 1 / 7;
+  width: 100%;
+}
+
+.postcard-detail--image ~ * {
+  grid-column: 5 / 9;
+  margin-left: 4%;
+}
+
+.postcard-detail--title {
+  grid-row: 1 / 2;
+  margin: 0 4% 0;
+  text-transform: capitalize;
+}
+
+.postcard-detail--subject {
+  grid-row: 2 / 3;
+}
+
+.postcard-detail--year {
+  grid-row: 3 / 4;
+}
+
+.postcard-detail--form {
+  display: flex;
+  flex-flow: row wrap;
+  grid-row: 4 / 9;
+  justify-content: space-between;
+  width: 96%;
+}
+
+.postcard-detail--form > input,
+.postcard-detail--form > textarea {
+  background: none;
+  border: 3px solid var(--color-red);
+  color: var(--color-red);
+  font-size: 16px;
+  font-weight: normal;
+  padding: 1rem 2rem;
+  position: relative;
+}
+
+.postcard-detail--form > input::placeholder,
+.postcard-detail--form > textarea::placeholder {
+  font-size: 16px;
+  opacity: 0.5;
+}
+
+.postcard-detail--form > input,
+.postcard-detail--form > button {
+  width: 44%;
+}
+
+.postcard-detail--form > input:nth-child(n + 3) {
+  margin: 1rem 0;
+}
+
+.postcard-detail--form > textarea {
+  width: 100%;
+}
+
+.postcard-detail--form > button {
+  background-color: var(--color-red);
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  height: 75px;
+  margin-top: 4%;
+}
+
+/* footer  */
 .footer {
   grid-area: footer;
 }

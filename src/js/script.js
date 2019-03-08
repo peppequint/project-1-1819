@@ -82,9 +82,27 @@ const render = {
 			<h1 class='postcard-detail--title'>${data[number].title}</h1>
 			<h3 class='postcard-detail--subject'>${data[number].subject}</h3>
 			<span class='postcard-detail--year'>${data[number].publication}</span>
+			${helper.form()}
 		`;
+
     postcardDetail.innerHTML = postcardTemplateDetail;
     container.appendChild(postcardDetail);
+  }
+};
+
+const helper = {
+  form: () => {
+    return `
+			<form class="postcard-detail--form" action="">
+				<input type="text" id="input-receiver" placeholder="Ontvanger" />
+				<input type="text" id="input-street" placeholder="Straat" />
+				<input type="text" id="input-city" placeholder="Woonplaats" />
+				<input type="text" id="input-zipcode" placeholder="Postcode" />
+				<textarea name="text" rows="8" cols="80" placeholder="Uw bericht"></textarea>
+				<button class='postcard-detail--button'>Versturen</button>
+				<button class='postcard-detail--button'>Print uit</button>
+			</form>
+		`;
   }
 };
 
@@ -101,6 +119,9 @@ const handle = {
   load: () => {
     document.querySelector("#A").classList.add("animate");
     console.log("Loading results");
+  },
+  test: () => {
+    console.log("Het werkt");
   }
 };
 
