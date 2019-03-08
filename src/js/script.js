@@ -1,4 +1,4 @@
-import { API } from "./oba-wrapper/js/index.js";
+import { API } from "./../../oba-wrapper/js/index.js";
 
 const app = {
   call: async query => {
